@@ -1,13 +1,13 @@
-$lightGray: #d1d1d1;
-$mediumGray: #a1a1a1;
-$darkGray: #818181;
+$lightGray: #888;
+$mediumGray: #555;
+$darkGray: #333;
 $mediumFont: calc(12px + 1vw);
 $largeFont: calc(18px + 1.1vw);
 
 body {
 	width: 100vw;
 	height: 100vh;
-	background-color: $lightGray;
+	background-color: $darkGray;
 	display: grid;
 	grid-template-rows: 1fr 5fr;
 	place-content: center;
@@ -17,7 +17,7 @@ body {
 	font-family: monospace;
 
 	header {
-		background-color: $darkGray;
+		background-color: $mediumGray;
 		width: 70vw;
 		display: flex;
 		justify-content: space-between;
@@ -28,7 +28,7 @@ body {
 	}
 
 	main {
-		background-color: $mediumGray;
+		background-color: $darkGray;
 		width: 70vw;
 		min-height: 300px;
 		display: flex;
@@ -56,5 +56,12 @@ body {
 	.field {
 		width: calc(15px + 1.4vw);
 		height: calc(15px + 1.4vw);
+		border: 0.2px solid #222;
+	}
+	.red {
+		background-color: rgb(234, 0, 0);
+	}
+	.green {
+		background-color: rgb(2, 168, 2);
 	}
 }
