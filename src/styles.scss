@@ -9,7 +9,7 @@ body {
 	height: 100vh;
 	background-color: $darkGray;
 	display: grid;
-	grid-template-rows: 1fr 5fr;
+	grid-template-rows: 1fr 6fr;
 	place-content: center;
 	overflow: hidden;
 	padding: 0;
@@ -49,14 +49,15 @@ body {
 	border: 2px solid black;
 	display: grid;
 	max-width: 90%;
-	max-height: 90%;
+	max-height: 92%;
 	grid-template-columns: repeat(16, minmax(12px, 1fr));
 	grid-template-rows: repeat(16, minmax(12px, 1fr));
 
 	.field {
-		width: calc(15px + 1.4vw);
-		height: calc(15px + 1.4vw);
+		width: calc(10px + 0.8vw + 0.8vh);
+		height: calc(10px + 0.8vw + 0.8vh);
 		border: 0.2px solid #222;
+		overflow: hidden;
 	}
 	.red {
 		background-color: rgb(234, 0, 0);
