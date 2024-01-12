@@ -5,7 +5,7 @@ let playingField = document.querySelectorAll(".field");
 function moveObject(add, sub) {
 	return {
 		addend: add,
-		ofboard: sub,
+		offboard: sub,
 	};
 }
 
@@ -13,15 +13,15 @@ let moves = new Map();
 
 // Set map for each move as key
 moves.set("up", moveObject(-16, 240));
-moves.set("right", moveObject(1, -16));
+moves.set("right", moveObject(1, -15));
 moves.set("down", moveObject(16, -240));
-moves.set("left", moveObject(-1, 16));
+moves.set("left", moveObject(-1, 15));
 
-let direction = "rigth";
+let direction = "right";
 
 let foodField;
 
-let snake = [24, 8, 7, 6, 5];
+let snake = [1, 2, 3, 4, 5];
 
 function displaySnake() {
 	snake.forEach((element) => {
@@ -35,10 +35,9 @@ function removeSnakeTail(field) {
 
 displaySnake();
 
-// let interval = setInterval(moveSnake, 500);
-
 function moveSnake() {
-	snake.unshift(snake[0] + moves.get(direction).addend);
+	let nextMove = returnMove(snake[0] + moves.get(direction).addend);
+	snake.unshift(snake[0] + nextMove);
 	removeSnakeTail(snake.pop());
 	displaySnake();
 }
@@ -61,3 +60,25 @@ window.addEventListener("keydown", (e) => {
 			break;
 	}
 });
+
+function returnMove(move) {
+	if (move < 0 || move > 256) {
+		return moves.get(direction).offboard;
+	} else if (!((move + 1) % 16) && direction == "left") {
+		return moves.get(direction).offboard;
+	} else if (!(move % 16) && direction == "right") {
+		return moves.get(direction).offboard;
+	} else {
+		return moves.get(direction).addend;
+	}
+}
+
+function spawnRedField() {
+	let randomField;
+	do {
+		randomField = Math.floor(Math.random() * 256);
+	} while (snake.includes(randomField));
+	playingField[randomField];
+}
+
+// let interval = setInterval(moveSnake, 500);
