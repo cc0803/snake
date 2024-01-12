@@ -78,7 +78,9 @@ function spawnRedField() {
 	do {
 		randomField = Math.floor(Math.random() * 256);
 	} while (snake.includes(randomField));
-	playingField[randomField];
+	playingField[randomField].classList.add("red");
 }
+
+spawnRedField();
 
 // let interval = setInterval(moveSnake, 500);
