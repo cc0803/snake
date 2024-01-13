@@ -5,6 +5,8 @@ let direction = "right";
 
 let snake = [1, 2];
 
+let redField;
+
 // Create object for moves map
 function movesObject(add, sub) {
 	return {
@@ -63,7 +65,11 @@ export function spawnRedField(gameField) {
 	// Change color of field with random number
 	gameField[randomField].classList.add("red");
 
-	return randomField;
+	redField = randomField;
+}
+
+function removeRedField(gameField) {
+	gameField[redField].classList.remove("red");
 }
 
 export function displaySnake(gameField) {
@@ -76,8 +82,8 @@ function removeSnakeTail(gameField, field) {
 	gameField[field].classList.remove("green");
 }
 
-function checkForRedField() {
-	if (snake[0] == redField) {
+function checkForRedField(field) {
+	if (field == redField) {
 		return true;
 	}
 	return false;
@@ -85,7 +91,14 @@ function checkForRedField() {
 
 export function moveSnake(gameField) {
 	let move = nextMove(snake[0] + moves.get(direction).addend);
+
+	// Check if Snake is on redField
+	if (checkForRedField(snake[0] + move)) {
+		removeRedField(gameField);
+		spawnRedField(gameField);
+	} else {
+		removeSnakeTail(gameField, snake.pop());
+	}
 	snake.unshift(snake[0] + move);
-	removeSnakeTail(gameField, snake.pop());
 	displaySnake(gameField);
 }

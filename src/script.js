@@ -16,6 +16,6 @@ window.addEventListener("keydown", (e) => {
 displaySnake(playingField);
 spawnRedField(playingField);
 
-// let interval = setInterval(function () {
-// 	moveSnake(playingField);
-// }, 500);
+let interval = setInterval(function () {
+	moveSnake(playingField);
+}, 500);
