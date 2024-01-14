@@ -23,13 +23,26 @@ spawnRedField(playingField);
 startButton.addEventListener("click", () => {
 	if (!game) {
 		interval = setInterval(function () {
-			moveSnake(playingField);
+			moveSnake(playingField, interval);
 		}, 400);
 		startButton.textContent = "Stop";
 		game = true;
 	} else {
-		startButton.textContent = "Start";
-		clearInterval(interval);
-		game = false;
+		stopEverything(interval, playingField, game);
 	}
 });
+
+function stopEverything(intervalFunction, gameField) {
+	if (game) {
+		game = false;
+	} else {
+		game = true;
+	}
+
+	clearInterval(intervalFunction);
+	snake = [1, 0];
+	resetBoard(gameField);
+	score = 0;
+	updateScore();
+	startButton.textContent = "Start";
+}

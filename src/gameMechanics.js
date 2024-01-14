@@ -5,6 +5,14 @@ let direction = "right";
 
 let snake = [1, 0];
 
+let score = snake.length - 2;
+
+let highscore = 0;
+
+const highscoreBoard = document.querySelector(".highscore");
+const scoreBoard = document.querySelector(".score:last-of-type");
+const startButton = document.querySelector(".start");
+
 let redField;
 
 // Create object for moves map
@@ -84,16 +92,18 @@ function removeSnakeTail(gameField, field) {
 
 function checkForRedField(field) {
 	if (field == redField) {
+		score++;
+		updateScore();
 		return true;
 	}
 	return false;
 }
 
-export function moveSnake(gameField) {
+export function moveSnake(gameField, intervalFunction) {
 	let move = nextMove(snake[0] + moves.get(direction).addend);
 
 	if (checkMove(move)) {
-		console.log("Invalid");
+		stopEverything(intervalFunction, gameField);
 	}
 
 	// Check if Snake is on redField
@@ -111,4 +121,19 @@ function checkMove(move) {
 	return snake.includes(move + snake[0]);
 }
 
-function stopEverything() {}
+function updateScore() {
+	if (score >= highscore) {
+		highscore = score;
+		highscoreBoard.textContent = highscore;
+	}
+	scoreBoard.textContent = score;
+}
+
+function resetBoard(gameField) {
+	gameField.forEach((field) => {
+		field.classList.remove("green");
+		field.classList.remove("red");
+	});
+	gameField[0].classList.add("green");
+	gameField[1].classList.add("green");
+}
