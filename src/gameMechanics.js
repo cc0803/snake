@@ -3,7 +3,7 @@ let moves = new Map();
 
 let direction = "right";
 
-let snake = [1, 2];
+let snake = [1, 0];
 
 let redField;
 
@@ -92,6 +92,10 @@ function checkForRedField(field) {
 export function moveSnake(gameField) {
 	let move = nextMove(snake[0] + moves.get(direction).addend);
 
+	if (checkMove(move)) {
+		console.log("Invalid");
+	}
+
 	// Check if Snake is on redField
 	if (checkForRedField(snake[0] + move)) {
 		removeRedField(gameField);
@@ -101,4 +105,8 @@ export function moveSnake(gameField) {
 	}
 	snake.unshift(snake[0] + move);
 	displaySnake(gameField);
+}
+
+function checkMove(move) {
+	return snake.includes(move + snake[0]);
 }
