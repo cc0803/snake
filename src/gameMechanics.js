@@ -110,3 +110,5 @@ export function moveSnake(gameField) {
 function checkMove(move) {
 	return snake.includes(move + snake[0]);
 }
+
+function stopEverything() {}
