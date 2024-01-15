@@ -4,6 +4,7 @@ import {
 	spawnRedField,
 	moveSnake,
 	displaySnake,
+	stopEverything,
 } from "./gameMechanics";
 
 const playingField = document.querySelectorAll(".field");
@@ -17,32 +18,19 @@ window.addEventListener("keydown", (e) => {
 	keyboardControls(e);
 });
 
+// setup the Game for the first time
 displaySnake(playingField);
 spawnRedField(playingField);
 
 startButton.addEventListener("click", () => {
 	if (!game) {
+		spawnRedField(playingField);
 		interval = setInterval(function () {
 			moveSnake(playingField, interval);
 		}, 400);
 		startButton.textContent = "Stop";
 		game = true;
 	} else {
-		stopEverything(interval, playingField, game);
+		game = stopEverything(interval, playingField, game);
 	}
 });
-
-function stopEverything(intervalFunction, gameField) {
-	if (game) {
-		game = false;
-	} else {
-		game = true;
-	}
-
-	clearInterval(intervalFunction);
-	snake = [1, 0];
-	resetBoard(gameField);
-	score = 0;
-	updateScore();
-	startButton.textContent = "Start";
-}

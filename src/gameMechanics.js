@@ -137,3 +137,19 @@ function resetBoard(gameField) {
 	gameField[0].classList.add("green");
 	gameField[1].classList.add("green");
 }
+
+export function stopEverything(intervalFunction, gameField, gameSatus) {
+	clearInterval(intervalFunction);
+	snake = [1, 0];
+	resetBoard(gameField);
+	score = 0;
+	updateScore();
+
+	if (gameSatus) {
+		startButton.textContent = "Start";
+		return false;
+	} else {
+		startButton.textContent = "Stop";
+		return true;
+	}
+}
